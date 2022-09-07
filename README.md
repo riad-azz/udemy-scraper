@@ -26,7 +26,7 @@ pip install requests
 pip install pysqlite3
 ```
 
-### Installing
+## Installing
 
 * If you wish to turn the program into an exe
 
@@ -44,7 +44,7 @@ the program should now be ready to launch
 
 ![program exe file](readme/readme_01.png)
 
-### Executing program
+## Executing program
 
 * You can run the bot simply by heading to the project directory and running the command
 ```
