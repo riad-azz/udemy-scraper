@@ -70,8 +70,15 @@ class Bot:
             self.logs = []
 
     def run(self):
-        self.log_print("Starting bot...")
+        self.log_print(f"Starting bot for {self.day}...")
         while True:
+            # Check if we entered a new day while bot was looping
+            temp = datetime.today()
+            if datetime(self.today.year, self.today.month, self.today.day) < datetime(temp.year, temp.month, temp.day):
+                self.today = datetime.today()
+                self.day = self.today.strftime("%Y-%m-%d")
+                self.logs = []
+                continue
             for keyword in self.KEYWORDS:
                 self.log_print(f"Searching new courses for '{keyword}' for date : {self.day}")
                 # Fetch all new courses
