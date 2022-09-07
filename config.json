@@ -1,0 +1,7 @@
+{
+	"keep_running": false,
+	"db_name": "database.db",
+	"keyword_pause_time": 1,
+	"finish_pause_time": 600,
+	"pages": 5
+}
