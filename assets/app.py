@@ -39,7 +39,7 @@ class Bot:
             temp_categories = f.read().strip()
             if temp_categories == "":
                 self.exit_error("Please make sure to add the desired search configs to categories.txt")
-            self.CATEGORIES = temp_categories.strip().split("\n")
+            self.CATEGORIES = [x.lower() for x in temp_categories.strip().split("\n")]
         # load keywords
         if not path.exists(keywords_file):
             self.exit_error("Please add a keywords.txt file then try again")
@@ -206,7 +206,7 @@ class Bot:
             if len(course["badges"]) == 0:
                 continue
             category = course["badges"][0]["context_info"]["category"]["title"]
-            if category in self.CATEGORIES and course["id"] not in self.added_courses:
+            if category.lower() in self.CATEGORIES and course["id"] not in self.added_courses:
                 course_obj = {"id": course["id"],
                               "category": category}
                 filtered.append(course_obj)
