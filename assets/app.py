@@ -1,5 +1,4 @@
 import json
-import os
 import sqlite3
 from datetime import datetime
 from os import path, mkdir
@@ -19,6 +18,10 @@ class Bot:
         # --- Load configs ---
         if not path.exists(self.CONFIG_DIR):
             self.exit_error("Please add a config.json file then try again")
+        if not path.exists(self.DATABASE_DIR):
+            mkdir(self.DATABASE_DIR)
+        if not path.exists(self.LOGS_DIR):
+            mkdir(self.LOGS_DIR)
         with open(self.CONFIG_DIR, "r") as f:
             config_json = json.load(f)
         self.db_name = config_json.get("db_name", "database.db")
@@ -60,8 +63,6 @@ class Bot:
         self.added_courses = self.load_courses()
         self.new_courses = 0
         self.total_new_courses = 0
-        if not path.exists(self.LOGS_DIR):
-            os.mkdir(self.LOGS_DIR)
         if path.exists(f"{self.LOGS_DIR}/log-{self.day}.txt"):
             with open(f"{self.LOGS_DIR}/log-{self.day}.txt", "r") as f:
                 self.logs = f.readlines()
@@ -125,7 +126,7 @@ class Bot:
         line = f"{msg} - {curr_time} \n"
         self.logs.append(line)
         if not path.exists(self.LOGS_DIR):
-            os.mkdir(self.LOGS_DIR)
+            mkdir(self.LOGS_DIR)
         with open(f"{self.LOGS_DIR}/logs-{self.day}.txt", "w") as f:
             f.writelines(self.logs)
 
